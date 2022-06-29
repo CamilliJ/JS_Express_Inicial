@@ -17,5 +17,13 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.13"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CamilliJ/JS_Express_Inicial.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CamilliJ/JS_Express_Inicial/issues"
+  },
+  "homepage": "https://github.com/CamilliJ/JS_Express_Inicial#readme"
 }
