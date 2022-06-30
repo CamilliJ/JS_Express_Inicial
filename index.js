@@ -49,10 +49,70 @@ app.get("/qualquer*caminho", (req, res) => {
     res.send(req.path)
 });
 
+
+// Escrevendo no body pelo Insomia (JSON)
 app.post("/testbody", (req, res) => {
     console.log(req.body)
     res.send("Funciona")
 });
+
+// Passando dados por parâmetros pela URL 
+app.get("/testParam/:id/:a", (req, res) => {
+    res.send(req.params.id + " - " + req.params.a)
+});
+
+// Parâmetro via query
+app.get("/testQuery", (req, res) => {
+    res.send(req.query)
+});
+
+// Next
+app.get("/testMultipleHandlers", (req, res, next) => {
+    console.log("Callback 1")
+    next();
+}, (req, res) => {
+    console.log("Callback 2")
+    res.end();
+});
+
+// Next com array
+const callback1 = (req, res, next) => {
+    console.log("Callback 1")
+    next();
+};
+
+function callback2 (req, res, next) {
+    console.log("Callback 2")
+    res.end()
+}
+
+const callback3 = (req, res) => {
+    console.log("Callback 3")
+    res.end()
+};
+
+
+app.get("/testMultipleHandlersArray", [callback1, callback2, callback3]);
+// não executa o callback3, pois no callback2 ele tem um res.end()
+
+
+// Route
+
+app.route("/testRoute")
+    .get((req, res) => {
+        res.send("/testRoute GET")
+    })
+    .get((req, res) => {
+        res.send(req.method)
+    })
+    .post((req, res) => {
+        res.send("/testRoute POST")
+    })
+    .delete((req, res) => {
+        res.send("/testRoute DELETE")
+    })
+
+
 
 // informando qual a porta eu estou usando 
 app.listen(3001, () =>{
